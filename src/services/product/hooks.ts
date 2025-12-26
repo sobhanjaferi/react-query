@@ -1,22 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { getProduct } from "./endPoints";
 import { IProduct } from "./types";
+import { useQuery } from "@tanstack/react-query";
 
 export const useGetProduct = () => {
-  const [data, setData] = useState<IProduct[]>([]);
-  const [isLoading, setIsLoading] = useState<Boolean>(false);
-
-  useEffect(() => {
-    setIsLoading(true);
-
-    getProduct().then((result) => {
-      setData(result);
-
-      setIsLoading(false);
-    });
-  }, []);
-
-  return { data, isLoading };
+  return useQuery<IProduct[]>({
+    queryKey: ["getProduct"],
+    queryFn: getProduct,
+  });
 };
