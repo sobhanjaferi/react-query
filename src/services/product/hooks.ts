@@ -8,5 +8,6 @@ export const useGetProduct = () => {
   return useQuery<IProduct[]>({
     queryKey: ["getProduct"],
     queryFn: getProduct,
+    initialData: [],
   });
 };
